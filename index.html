@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midjourney×Canvaでレイヤー設計を極める! / 広告表現セミナーリンク集</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Yusei+Magic&display=swap" rel="stylesheet">
+    
+    <style>
+        /* フォント設定 */
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3 {
+            font-family: 'Yusei Magic', sans-serif;
+        }
+
+        /* キラキラ背景アニメーション */
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffc8dd;
+        }
+        
+        /* カードのホバーエフェクト */
+        .card-link {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-link:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(255, 138, 184, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-rose-100 via-purple-100 to-sky-100 min-h-screen overflow-x-hidden">
+    <!-- キラキラ背景用のコンテナ -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10" id="sparkle-container"></div>
+
+    <div class="container mx-auto p-4 sm:p-8 relative z-10">
+        <!-- ヘッダー -->
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 drop-shadow-md">
+                \ Midjourney×Canvaでレイヤー設計を極める! /
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mt-2">動かして魅せる広告表現セミナー</h2>
+            <p class="mt-4 text-lg text-pink-500 font-bold">
+                （2025.7.30開催） 🔸 まとめ図解リンク集
+            </p>
+            <p class="mt-3 text-xs text-gray-400 max-w-md mx-auto">
+                ※文字起こしデータを元に作成しているため、誤字脱字や情報の誤りなども含まれている可能性があります。予めご了承ください。
+            </p>
+        </header>
+
+        <!-- メインコンテンツ: リンクカード -->
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1 -->
+            <a href="1-seminar-overview.html" class="card-link block">
+                <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white">
+                    <h3 class="text-xl font-bold text-pink-500 mb-2">① 💖 まずはここから！セミナーの全体像</h3>
+                    <p class="text-gray-600 text-sm">
+                        オープニングからQ&Aまで、セミナーの全貌をダイジェストでお届け！どんな内容だったか、ここを読めばまるわかりだよ✨
+                    </p>
+                </div>
+            </a>
+            
+            <!-- Card 2 -->
+            <a href="2-seminar-impact.html" class="card-link block">
+                <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white">
+                    <h3 class="text-xl font-bold text-purple-500 mb-2">② 🚀 感動の嵐！人気のヒミツを大解剖</h3>
+                    <p class="text-gray-600 text-sm">
+                        「神回！」と絶賛された理由がここに！参加者のリアルな声や、セミナーがもたらした驚きの成果をチェックしよう！
+                    </p>
+                </div>
+            </a>
+            
+            <!-- Card 3 -->
+            <a href="3-basic-workflow.html" class="card-link block">
+                <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white">
+                    <h3 class="text-xl font-bold text-sky-500 mb-2">③ 🎨 AIで魔法をかける基本ステップ</h3>
+                    <p class="text-gray-600 text-sm">
+                        AIを使った広告制作の基本フローを5ステップで紹介！これさえ押さえれば、あなたも今日からクリエイターデビュー！
+                    </p>
+                </div>
+            </a>
+            
+            <!-- Card 4 -->
+            <a href="4-detailed-workflow.html" class="card-link block">
+                <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white">
+                    <h3 class="text-xl font-bold text-teal-500 mb-2">④ 🔍 もっと詳しく！制作プロセス完全版</h3>
+                    <p class="text-gray-600 text-sm">
+                        企画から完成まで、各ステップをさらに深掘り！プロの思考をのぞいて、ワンランク上の作品を目指そう😉
+                    </p>
+                </div>
+            </a>
+            
+            <!-- Card 5 -->
+            <a href="5-midjourney-canva-guide.html" class="card-link block">
+                <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white">
+                    <h3 class="text-xl font-bold text-amber-500 mb-2">⑤ 🤝 最強タッグ！Midjourney & Canva連携術</h3>
+                    <p class="text-gray-600 text-sm">
+                        MidjourneyとCanvaを組み合わせる最強テクニックを伝授！2つのツールを使いこなして、表現の幅を無限に広げよう！
+                    </p>
+                </div>
+            </a>
+            
+            <!-- Card 6 -->
+            <a href="6-practical-guide.html" class="card-link block">
+                <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white">
+                    <h3 class="text-xl font-bold text-red-400 mb-2">⑥ 🌟 明日から使える！実践テクニック</h3>
+                    <p class="text-gray-600 text-sm">
+                        ネタ切れ対策や、デザインの4原則など、すぐに役立つプロの技が満載！これであなたもデザインマスターに👑
+                    </p>
+                </div>
+            </a>
+
+            <!-- Card 7 -->
+            <a href="7-complete-guide.html" class="card-link block col-span-1 md:col-span-2 lg:col-span-3">
+                 <div class="bg-white/70 backdrop-blur-md rounded-2xl p-6 h-full shadow-lg border border-white text-center">
+                    <h3 class="text-2xl font-bold text-fuchsia-500 mb-2">⑦ 💎 総まとめ！セミナー完全図解</h3>
+                    <p class="text-gray-600 text-sm">
+                        セミナーの全てを一枚の図解に凝縮！講師の経歴から制作事例、ツールの使い方まで、全部まとめて復習しよう！
+                    </p>
+                </div>
+            </a>
+
+        </main>
+
+        <!-- フッター -->
+        <footer class="text-center mt-16 text-xs text-gray-500">
+            <p>&copy; 2025 動かして魅せる広告表現セミナー. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // キラキラエフェクトを生成するスクリプト
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('sparkle-container');
+            if (!container) return;
+
+            const sparkleCount = 50; // キラキラの数
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // 位置とアニメーションの遅延をランダムに設定
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 2}s`;
+                sparkle.style.animationDuration = `${1.5 + Math.random() * 1.5}s`;
+                
+                container.appendChild(sparkle);
+            }
+        });
+    </script>
+</body>
+</html>
 
