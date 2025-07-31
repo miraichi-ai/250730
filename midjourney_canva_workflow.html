@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midjourney→Canva 実践ワークフロー図解</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Mermaid.js の読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                securityLevel: 'loose',
+                fontFamily: '"Kaisei Decol", sans-serif',
+                themeVariables: {
+                    primaryColor: '#4CAF50',
+                    primaryTextColor: '#fff',
+                    primaryBorderColor: '#E91E63',
+                    lineColor: '#009688',
+                    secondaryColor: '#FFC107',
+                    tertiaryColor: '#FAFAFA'
+                },
+                flowchart: {
+                    cornerRadius: 15,
+                    curve: 'cardinal',
+                    htmlLabels: true
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        :root {
+            --main-color: #4CAF50;
+            --accent-1: #9575CD;
+            --accent-2: #FFC107;
+            --accent-3: #009688;
+            --accent-4: #E91E63;
+            --bg-color: #FAFAFA;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Kaisei Decol', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--main-color), var(--accent-3));
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .workflow-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--main-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent-4));
+            border-radius: 2px;
+        }
+        
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .point-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 2px solid var(--accent-4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .point-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-4);
+            transition: left 0.3s ease;
+        }
+        
+        .point-card:hover::before {
+            left: 0;
+        }
+        
+        .point-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.2);
+        }
+        
+        .point-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .point-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .point-desc {
+            color: var(--text-light);
+        }
+        
+        .process-flow {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .flow-step {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-step:nth-child(1) { border-color: var(--main-color); }
+        .flow-step:nth-child(2) { border-color: var(--accent-1); }
+        .flow-step:nth-child(3) { border-color: var(--accent-2); }
+        .flow-step:nth-child(4) { border-color: var(--accent-3); }
+        
+        .flow-step:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--main-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .flow-step:nth-child(2) .step-number { background: var(--accent-1); }
+        .flow-step:nth-child(3) .step-number { background: var(--accent-2); color: var(--text-dark); }
+        .flow-step:nth-child(4) .step-number { background: var(--accent-3); }
+        
+        .step-icon {
+            font-size: 3rem;
+            margin: 2rem 0 1rem;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .canva-features {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 2px solid var(--accent-2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+        }
+        
+        .feature-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .feature-desc {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-tips {
+            background: #fff8e1;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-2);
+        }
+        
+        .tips-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .tips-text {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .design-workflow {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .workflow-example {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 2px solid var(--main-color);
+        }
+        
+        .example-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .example-step {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .example-number {
+            width: 30px;
+            height: 30px;
+            background: var(--main-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: bold;
+        }
+        
+        .mermaid {
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .key-points,
+            .flow-steps,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎨 Midjourney→Canva 実践ワークフロー</h1>
+            <p>画像生成から動画制作まで、プロ級コンテンツ作成術</p>
+        </header>
+
+        <!-- 重要なポイント -->
+        <section class="workflow-section">
+            <h2 class="section-title">⚡ 重要なポイント</h2>
+            
+            <div class="key-points">
+                <div class="point-card">
+                    <div class="point-icon">🚫</div>
+                    <div class="point-title">Midjourneyでは文字を避ける</div>
+                    <div class="point-desc">日本語は文字化けしやすく、英語でもきれいに出すのは困難。文字はCanvaで後から追加する方が効率的です。</div>
+                </div>
+                
+                <div class="point-card">
+                    <div class="point-icon">🎬</div>
+                    <div class="point-title">動画生成の新機能</div>
+                    <div class="point-desc">生成した画像をそのまま動画にできるだけでなく、アップロードした画像を動かすことも可能になりました。</div>
+                </div>
+                
+                <div class="point-card">
+                    <div class="point-icon">📐</div>
+                    <div class="point-title">Canvaでレイアウト調整</div>
+                    <div class="point-desc">位置調整、文字の見やすさ向上、アニメーション追加など、最終的な品質向上を担います。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- フロー図 -->
+        <section class="workflow-section">
+            <h2 class="section-title">🔄 制作フロー概要</h2>
+            
+            <div class="mermaid">
+                graph TD
+                    A["🤖 ChatGPT<br/>企画・プロンプト生成"] --> B["🎨 Midjourney<br/>画像生成（文字なし）"]
+                    B --> C["📐 Canva<br/>レイアウト・文字追加"]
+                    C --> D["🎬 Midjourney<br/>動画生成"]
+                    D --> E["✨ Canva<br/>最終調整・アニメーション"]
+                    
+                    B1["16:9比率"] --> B
+                    B2["顔が見える構図"] --> B
+                    B3["日本語プロンプトOK"] --> B
+                    
+                    C1["背景除去機能"] --> C
+                    C2["レイヤー管理"] --> C
+                    C3["テンプレート活用"] --> C
+                    
+                    E1["文字組み調整"] --> E
+                    E2["透明度調整"] --> E
+                    E3["アニメーション"] --> E
+                    
+                    style A fill:#9575CD,stroke:#fff,stroke-width:2px,color:#fff
+                    style B fill:#4CAF50,stroke:#fff,stroke-width:2px,color:#fff
+                    style C fill:#FFC107,stroke:#fff,stroke-width:2px,color:#000
+                    style D fill:#009688,stroke:#fff,stroke-width:2px,color:#fff
+                    style E fill:#E91E63,stroke:#fff,stroke-width:2px,color:#fff
+            </div>
+        </section>
+
+        <!-- プロセス詳細 -->
+        <section class="process-flow">
+            <h2 class="section-title">📋 実践プロセス詳細</h2>
+            
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🎯</div>
+                    <div class="step-title">企画・設計</div>
+                    <div class="step-desc">目的、ターゲット、ベネフィットを明確化。新スクール型コミュニティの認知拡大など具体的な目標設定。</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🖼️</div>
+                    <div class="step-title">画像生成</div>
+                    <div class="step-desc">Midjourneyで16:9比率、顔が見える構図で生成。日本語プロンプトも使用可能。</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">✂️</div>
+                    <div class="step-title">Canva編集</div>
+                    <div class="step-desc">背景除去、レイヤー管理、文字追加でプロ仕様に調整。テンプレートも活用。</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🎬</div>
+                    <div class="step-title">動画化・完成</div>
+                    <div class="step-desc">Midjourneyで動画生成後、Canvaでアニメーション追加して最終調整。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Canva機能詳細 -->
+        <section class="canva-features">
+            <h2 class="section-title">🛠️ Canva活用テクニック</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">🎭</div>
+                        <div class="feature-title">背景除去・レイヤー管理</div>
+                    </div>
+                    <div class="feature-desc">
+                        背景を除去して素材を重ね合わせ、レイヤーの順番を調整して奥行きを表現できます。
+                    </div>
+                    <div class="feature-tips">
+                        <div class="tips-title">💡 実践ポイント</div>
+                        <div class="tips-text">透明度を10%刻みで調整し、帯状の背景を作ることで文字を読みやすくできます</div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-title">文字組み・レイアウト</div>
+                    </div>
+                    <div class="feature-desc">
+                        単純に文字を書くだけでなく、文字組みを意識したデザインで差をつけることができます。
+                    </div>
+                    <div class="feature-tips">
+                        <div class="tips-title">💡 実践ポイント</div>
+                        <div class="tips-text">日付や重要な情報は単調にならないよう、視覚的な工夫を加えて表現します</div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-title">テンプレート活用</div>
+                    </div>
+                    <div class="feature-desc">
+                        豊富なテンプレートから素材の一部をコピーして組み合わせることで効率的に制作できます。
+                    </div>
+                    <div class="feature-tips">
+                        <div class="tips-title">💡 実践ポイント</div>
+                        <div class="tips-text">「これとこれとこれが欲しい」と思った要素をコピーして自分の作品に活用</div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">アニメーション機能</div>
+                    </div>
+                    <div class="feature-desc">
+                        文字や素材に動きを加えることで、静的なデザインを魅力的な動画コンテンツに変換できます。
+                    </div>
+                    <div class="feature-tips">
+                        <div class="tips-title">💡 実践ポイント</div>
+                        <div class="tips-text">控えめなアニメーションでも大きな差が生まれ、プロ感が格段にアップします</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 実践例 -->
+        <section class="design-workflow">
+            <h2 class="section-title">🎯 実践例：サムネイル制作</h2>
+            
+            <div class="workflow-example">
+                <h3 style="color: var(--main-color); margin-bottom: 1rem;">📖 ケーススタディ：「広告表現セミナー」サムネイル</h3>
+                <p style="margin-bottom: 1rem; color: var(--text-light);">
+                    実際の制作プロセスを通じて、理論を実践に落とし込む方法を解説
+                </p>
+                
+                <div class="example-steps">
+                    <div class="example-step">
+                        <div class="example-number">1</div>
+                        <strong>人物写真</strong><br>
+                        <small>最も注目される要素として女性を配置</small>
+                    </div>
+                    <div class="example-step">
+                        <div class="example-number">2</div>
+                        <strong>メインタイトル</strong><br>
+                        <small>「広告表現」を大きく目立たせる</small>
+                    </div>
+                    <div class="example-step">
+                        <div class="example-number">3</div>
+                        <strong>サブタイトル</strong><br>
+                        <small>「セミナー」は小さく抑制</small>
+                    </div>
+                    <div class="example-step">
+                        <div class="example-number">4</div>
+                        <strong>装飾要素</strong><br>
+                        <small>華やかさを演出する「足し算」要素</small>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background: white; border-radius: 8px; border-left: 4px solid var(--main-color);">
+                    <strong style="color: var(--main-color);">結果：</strong>
+                    <span style="color: var(--text-light);">視線誘導がうまく機能し、300人の参加者を集める「伝説のサムネイル」が完成</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ページ読み込み時のアニメーション
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.point-card, .flow-step, .feature-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

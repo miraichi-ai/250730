@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI活用 詳細ワークフロー図解</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Mermaid.js の読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                securityLevel: 'loose',
+                fontFamily: '"Kaisei Decol", sans-serif',
+                themeVariables: {
+                    primaryColor: '#4CAF50',
+                    primaryTextColor: '#fff',
+                    primaryBorderColor: '#E91E63',
+                    lineColor: '#009688',
+                    secondaryColor: '#FFC107',
+                    tertiaryColor: '#FAFAFA'
+                },
+                flowchart: {
+                    cornerRadius: 15,
+                    curve: 'cardinal',
+                    htmlLabels: true
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        :root {
+            --main-color: #4CAF50;
+            --accent-1: #9575CD;
+            --accent-2: #FFC107;
+            --accent-3: #009688;
+            --accent-4: #E91E63;
+            --bg-color: #FAFAFA;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Kaisei Decol', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--main-color), var(--accent-3));
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .workflow-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--main-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent-4));
+            border-radius: 2px;
+        }
+        
+        .detailed-flow {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .flow-step {
+            display: flex;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border-radius: 15px;
+            border-left: 5px solid var(--main-color);
+            position: relative;
+        }
+        
+        .flow-step:nth-child(2) { border-left-color: var(--accent-1); }
+        .flow-step:nth-child(3) { border-left-color: var(--accent-2); }
+        .flow-step:nth-child(4) { border-left-color: var(--accent-3); }
+        .flow-step:nth-child(5) { border-left-color: var(--accent-4); }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--main-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .flow-step:nth-child(2) .step-icon { background: var(--accent-1); }
+        .flow-step:nth-child(3) .step-icon { background: var(--accent-2); color: var(--text-dark); }
+        .flow-step:nth-child(4) .step-icon { background: var(--accent-3); }
+        .flow-step:nth-child(5) .step-icon { background: var(--accent-4); }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .step-desc {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .step-details {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .detail-point {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .detail-point:last-child {
+            margin-bottom: 0;
+        }
+        
+        .point-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--main-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .point-text {
+            flex: 1;
+        }
+        
+        .point-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+        
+        .point-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .design-principles {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .principle-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .principle-card:nth-child(1) { border-color: var(--accent-2); }
+        .principle-card:nth-child(2) { border-color: var(--accent-1); }
+        .principle-card:nth-child(3) { border-color: var(--accent-3); }
+        .principle-card:nth-child(4) { border-color: var(--accent-4); }
+        
+        .principle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .principle-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .principle-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .principle-card:nth-child(1) .principle-number { background: var(--accent-2); color: var(--text-dark); }
+        .principle-card:nth-child(2) .principle-number { background: var(--accent-1); }
+        .principle-card:nth-child(3) .principle-number { background: var(--accent-3); }
+        .principle-card:nth-child(4) .principle-number { background: var(--accent-4); }
+        
+        .principle-desc {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .principle-example {
+            background: #f0f7ff;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-3);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        
+        .visual-hierarchy {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .hierarchy-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .hierarchy-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--main-color);
+            text-align: center;
+        }
+        
+        .hierarchy-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--main-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .hierarchy-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .hierarchy-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .mermaid {
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .flow-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-icon {
+                margin: 0 auto 1rem;
+            }
+            
+            .principles-grid,
+            .hierarchy-points {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔄 AI活用 詳細ワークフロー図解</h1>
+            <p>ChatGPT × Midjourney × Canva 実践的制作プロセス</p>
+        </header>
+
+        <!-- 詳細フロー -->
+        <section class="workflow-section">
+            <h2 class="section-title">📋 詳細制作フロー</h2>
+            
+            <div class="mermaid">
+                graph TD
+                    A["🎯 5W1H設定<br/>企画・コンセプト"] --> B["✍️ プロンプト生成<br/>ChatGPT"]
+                    B --> C["🎨 画像生成<br/>Midjourney"]
+                    C --> D["📐 レイアウト調整<br/>Canva"]
+                    D --> E["🎬 動画化<br/>Midjourney"]
+                    E --> F["✨ 最終調整<br/>Canva"]
+                    
+                    A1["誰に？"] --> A
+                    A2["何を？"] --> A
+                    A3["なぜ？"] --> A
+                    
+                    C1["パーソナライズON"] --> C
+                    C2["画像品質向上"] --> C
+                    
+                    D1["文字配置"] --> D
+                    D2["デザイン調整"] --> D
+                    
+                    F1["アニメーション"] --> F
+                    F2["最終仕上げ"] --> F
+                    
+                    style A fill:#4CAF50,stroke:#fff,stroke-width:2px,color:#fff
+                    style B fill:#9575CD,stroke:#fff,stroke-width:2px,color:#fff
+                    style C fill:#FFC107,stroke:#fff,stroke-width:2px,color:#000
+                    style D fill:#009688,stroke:#fff,stroke-width:2px,color:#fff
+                    style E fill:#E91E63,stroke:#fff,stroke-width:2px,color:#fff
+                    style F fill:#4CAF50,stroke:#fff,stroke-width:2px,color:#fff
+            </div>
+            
+            <div class="detailed-flow">
+                <div class="flow-step">
+                    <div class="step-icon">🎯</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 1: 5W1H設定・企画立案</div>
+                        <div class="step-desc">「何を伝えたいのか」を明確にし、メインコピーも生成します</div>
+                        <div class="step-details">
+                            <div class="detail-point">
+                                <div class="point-icon">誰</div>
+                                <div class="point-text">
+                                    <div class="point-title">ターゲット設定</div>
+                                    <div class="point-desc">20代〜40代前半、成長志向のビジネスパーソン</div>
+                                </div>
+                            </div>
+                            <div class="detail-point">
+                                <div class="point-icon">何</div>
+                                <div class="point-text">
+                                    <div class="point-title">伝えたい内容</div>
+                                    <div class="point-desc">新スクール型コミュニティの認知拡大</div>
+                                </div>
+                            </div>
+                            <div class="detail-point">
+                                <div class="point-icon">なぜ</div>
+                                <div class="point-text">
+                                    <div class="point-title">目的・ベネフィット</div>
+                                    <div class="point-desc">実践的な学びと自動化スキルの習得</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-icon">✍️</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 2: Midjourney用プロンプト生成</div>
+                        <div class="step-desc">ChatGPTでMidjourney用のプロンプトを作成し、ペタッと貼るだけで画像生成</div>
+                        <div class="step-details">
+                            <div class="detail-point">
+                                <div class="point-icon">📝</div>
+                                <div class="point-text">
+                                    <div class="point-title">構成設計</div>
+                                    <div class="point-desc">右側に人物、左側にタイトル配置の指示</div>
+                                </div>
+                            </div>
+                            <div class="detail-point">
+                                <div class="point-icon">🎨</div>
+                                <div class="point-text">
+                                    <div class="point-title">視覚的要素</div>
+                                    <div class="point-desc">誘目性を高めるポイントを考慮したレイアウト指示</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-icon">🎨</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 3: Midjourney画像生成</div>
+                        <div class="step-desc">パーソナライズ機能を活用して自分好みの安定した画像を生成</div>
+                        <div class="step-details">
+                            <div class="detail-point">
+                                <div class="point-icon">⚙️</div>
+                                <div class="point-text">
+                                    <div class="point-title">パーソナライズON</div>
+                                    <div class="point-desc">自分色の画像を安定して生成するための設定</div>
+                                </div>
+                            </div>
+                            <div class="detail-point">
+                                <div class="point-icon">🚫</div>
+                                <div class="point-text">
+                                    <div class="point-title">文字は含めない</div>
+                                    <div class="point-desc">日本語は文字化けするため、文字はCanvaで後から追加</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-icon">📐</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 4: Canvaでレイアウト調整</div>
+                        <div class="step-desc">文字のレイアウトや位置調整、見やすくするための工夫を実装</div>
+                        <div class="step-details">
+                            <div class="detail-point">
+                                <div class="point-icon">📝</div>
+                                <div class="point-text">
+                                    <div class="point-title">文字配置</div>
+                                    <div class="point-desc">タイトル、サブタイトル、キャッチコピーの最適配置</div>
+                                </div>
+                            </div>
+                            <div class="detail-point">
+                                <div class="point-icon">🎯</div>
+                                <div class="point-text">
+                                    <div class="point-title">整列ツール活用</div>
+                                    <div class="point-desc">右揃え、左揃え、中央揃えで美しく整理</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-icon">🎬</div>
+                    <div class="step-content">
+                        <div class="step-title">Step 5: 動画生成＆最終調整</div>
+                        <div class="step-desc">Midjourneyで動画化し、Canvaでアニメーションを追加して完成</div>
+                        <div class="step-details">
+                            <div class="detail-point">
+                                <div class="point-icon">🎥</div>
+                                <div class="point-text">
+                                    <div class="point-title">動画生成</div>
+                                    <div class="point-desc">画像をアップするだけで破綻なく動いてくれる</div>
+                                </div>
+                            </div>
+                            <div class="detail-point">
+                                <div class="point-icon">✨</div>
+                                <div class="point-text">
+                                    <div class="point-title">アニメーション追加</div>
+                                    <div class="point-desc">文字や素材に動きをプラスして魅力的に仕上げ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- デザイン四大原則 -->
+        <section class="design-principles">
+            <h2 class="section-title">🎯 デザイン四大原則（実践ポイント）</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
+                これを守っていると素人っぽさから抜け出すことができる、マストでやってほしい基礎原則
+            </p>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-title">
+                        <div class="principle-number">①</div>
+                        近接
+                    </div>
+                    <div class="principle-desc">関連する要素は近づけて配置する</div>
+                    <div class="principle-example">
+                        <strong>実例：</strong>カフェラテの画像とその価格表示を近くに配置することで、何がいくらなのかが一目で分かるようになります。四角は四角同士、三角は三角同士でカテゴライズ。
+                    </div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-title">
+                        <div class="principle-number">②</div>
+                        整列
+                    </div>
+                    <div class="principle-desc">要素をきちんと揃えて配置する</div>
+                    <div class="principle-example">
+                        <strong>実例：</strong>フリーハンドでやると崩れてしまうので、Canvaやアドビエクスプレスの整列ツールを使って右揃え、左揃え、中央揃えを意図的に行う。
+                    </div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-title">
+                        <div class="principle-number">③</div>
+                        反復
+                    </div>
+                    <div class="principle-desc">デザイン要素を繰り返して一貫性を出す</div>
+                    <div class="principle-example">
+                        <strong>実例：</strong>背景のグラデーション色を統一し、3ページ目と色が違ったり使ってるアイコンが違うと気持ち悪いので、全部統一。タイトル位置や色も絶対にずらさない。
+                    </div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-title">
+                        <div class="principle-number">④</div>
+                        対比
+                    </div>
+                    <div class="principle-desc">違いを強調して重要な部分を目立たせる</div>
+                    <div class="principle-example">
+                        <strong>実例：</strong>タイトルの「広告表現」を一番目立たせたい場合、「セミナー」という文字は小さくする。強弱をつけて目立たせたいところを目立たせる。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 誘目性のポイント -->
+        <section class="visual-hierarchy">
+            <h2 class="section-title">👁️ 誘目性を高めるポイント</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
+                人間の視線の動きに合わせて、効果的に情報を配置する技術
+            </p>
+            
+            <div class="hierarchy-points">
+                <div class="hierarchy-card">
+                    <div class="hierarchy-icon">↘️</div>
+                    <div class="hierarchy-title">① 配置の順番</div>
+                    <div class="hierarchy-desc">
+                        上から下、左から右に向かって視線が動くため、優先順位の高いものから順に配置する
+                    </div>
+                </div>
+                
+                <div class="hierarchy-card">
+                    <div class="hierarchy-icon">📏</div>
+                    <div class="hierarchy-title">② 表示領域（大きさ）</div>
+                    <div class="hierarchy-desc">
+                        人は大きいものから小さいものへ視線を移すため、重要な情報を大きく配置する
+                    </div>
+                </div>
+                
+                <div class="hierarchy-card">
+                    <div class="hierarchy-icon">🔄</div>
+                    <div class="hierarchy-title">③ 奥行き</div>
+                    <div class="hierarchy-desc">
+                        要素の重なり順を変えることで、ユーザーが見る順番をコントロールできる
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 10px; border-left: 4px solid var(--main-color);">
+                <h4 style="color: var(--main-color); margin-bottom: 1rem;">💡 実践例：サムネイル制作</h4>
+                <p style="margin-bottom: 1rem;"><strong>①まず女性の写真に注目</strong> → 人物が一番目立つ配置</p>
+                <p style="margin-bottom: 1rem;"><strong>②次にここを見せたい</strong> → メインタイトル「広告表現セミナー」</p>
+                <p><strong>③装飾要素で華やか</strong> → あってもなくても困らないが、あるとより良い「足し算」要素</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ページ読み込み時のアニメーション
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.flow-step, .principle-card, .hierarchy-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+</body>
+</html>
